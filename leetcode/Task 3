@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definition for singly-linked list
+struct ListNode {
+    int val;
+    struct ListNode *next;
+};
+
+// Helper function to create a new node
+struct ListNode* newNode(int val) {
+    struct ListNode* node = (struct ListNode*)malloc(sizeof(struct ListNode));
+    node->val = val;
+    node->next = NULL;
+    return node;
+}
+
+// Merge function
+struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
+    struct ListNode dummy;  // fake head node
+    struct ListNode* tail = &dummy;
+    dummy.next = NULL;
+
+    while (list1 != NULL && list2 != NULL) {
+        if (list1->val <= list2->val) {
+            tail->next = list1;
+            list1 = list1->next;
+        } else {
+            tail->next = list2;
+            list2 = list2->next;
+        }
+        tail = tail->next;
+    }
+
+    // Attach the remaining nodes
+    if (list1 != NULL) tail->next = list1;
+    else tail->next = list2;
+
+    return dummy.next;
+}
+
+// Print list for testing
+void printList(struct ListNode* head) {
+    while (head != NULL) {
+        printf("%d ", head->val);
+        head = head->next;
+    }
+    printf("\n");
+}
+
+int main() {
+    // Example input
+    struct ListNode* list1 = newNode(1);
+    list1->next = newNode(2);
+    list1->next->next = newNode(4);
+
+    struct ListNode* list2 = newNode(1);
+    list2->next = newNode(3);
+    list2->next->next = newNode(4);
+
+    struct ListNode* merged = mergeTwoLists(list1, list2);
+    printList(merged); // Output: 1 1 2 3 4 4
+
+    return 0;
+}
