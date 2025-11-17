@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int maxProfit(int* prices, int size) {
+    int minPrice = prices[0], profit = 0;
+    for (int i = 1; i < size; i++) {
+        if (prices[i] < minPrice) minPrice = prices[i];
+        if (prices[i] - minPrice > profit) profit = prices[i] - minPrice;
+    }
+    return profit;
+}
+
+int main() {
+    int prices[] = {7,1,5,3,6,4};
+    printf("Max Profit: %d\n", maxProfit(prices, 6));
+    return 0;
+}
