@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+void intersect(int* nums1, int m, int* nums2, int n) {
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            if(nums1[i] == nums2[j]) {
+                printf("%d ", nums1[i]);
+                nums2[j] = -1; // Mark used
+                break;
+            }
+        }
+    }
+}
+
+int main() {
+    int nums1[] = {1,2,2,1};
+    int nums2[] = {2,2};
+    intersect(nums1,4,nums2,2);
+    return 0;
+}
