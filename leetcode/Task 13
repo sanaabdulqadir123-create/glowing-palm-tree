@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+int isPalindrome(int x) {
+    if(x < 0) return 0;
+    int rev = 0, num = x;
+    while(num) {
+        rev = rev * 10 + num % 10;
+        num /= 10;
+    }
+    return rev == x;
+}
+
+int main() {
+    int num = 121;
+    printf("%d\n", isPalindrome(num));
+    return 0;
+}
