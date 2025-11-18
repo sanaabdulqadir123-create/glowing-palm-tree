@@ -1,104 +1,110 @@
 #include <stdio.h>
 
-int main() {
-    int choice, id, credits = 0;      // User choice, course ID, total credits
-    int reg[5] = {0};                 // Array to store registered courses (0 = not registered, 1 = registered)
-    int hrs[5] = {3, 2, 2, 3, 3};     // Credit hours for each course
-    char *names[5] = {                // Course names
-        "Programming Fundamentals",
-        "Islamiyat",
-        "Maths",
-        "English",
-        "Applied Physics"
-    };
+int main()
+{
+    int courseID, choice;
+    int totalCredits = 0;
+    int registered[5] = {0, 0, 0, 0, 0}; // to store registered courses
 
-    while (1) {    // Infinite loop to keep showing the menu
-        // Display menu
-        printf("\n=== COURSE REGISTRATION ===\n");
-        printf("1. Show Courses\n");
+    while (1)
+    {
+        printf("\n==== STUDENT COURSE REGISTRATION SYSTEM ====\n");
+        printf("1. Show Available Courses\n");
         printf("2. Register a Course\n");
         printf("3. Drop a Course\n");
-        printf("4. My Courses\n");
-        printf("5. Total Credits\n");
+        printf("4. Show Registered Courses\n");
+        printf("5. Show Total Credit Hours\n");
         printf("6. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
-        // Show all available courses
-        if (choice == 1) {
+        switch (choice)
+        {
+        case 1:
             printf("\nAvailable Courses:\n");
-            for (int i = 0; i < 5; i++) {
-                printf("%d. %s - %d Credits\n", i + 1, names[i], hrs[i]);
-            }
-        }
+            printf("1. Programming Fundamentals - 3 Credit Hours\n");
+            printf("2. Islamiyat - 2 Credit Hours\n");
+            printf("3. Maths - 2 Credit Hours\n");
+            printf("4. English - 3 Credit Hours\n");
+            printf("5. Applied Physics - 3 Credit Hours\n");
+            break;
 
-        // Register a course
-        else if (choice == 2) {
-            printf("Enter Course ID to register (1-5): ");
-            scanf("%d", &id);
+        case 2:
+            printf("Enter Course ID to Register (1-5): ");
+            scanf("%d", &courseID);
 
-            if (id < 1 || id > 5) {
+            if (courseID < 1 || courseID > 5)
                 printf("Invalid Course ID!\n");
-            } 
-            else if (reg[id - 1] == 1) {
-                printf("You are already registered for this course!\n");
-            } 
-            else {
-                reg[id - 1] = 1;          // Mark course as registered
-                credits += hrs[id - 1];    // Add credit hours
-                printf("Course registered successfully!\n");
+            else if (registered[courseID - 1] == 1)
+                printf("You already registered this course!\n");
+            else
+            {
+                registered[courseID - 1] = 1;
+
+                if (courseID == 1 || courseID == 4 || courseID == 5)
+                    totalCredits += 3;
+                else if (courseID == 2 || courseID == 3)
+                    totalCredits += 2;
+
+                printf("Course Registered Successfully!\n");
             }
-        }
+            break;
 
-        // Drop a course
-        else if (choice == 3) {
-            printf("Enter Course ID to drop (1-5): ");
-            scanf("%d", &id);
+        case 3:
+            printf("Enter Course ID to Drop (1-5): ");
+            scanf("%d", &courseID);
 
-            if (id < 1 || id > 5) {
+            if (courseID < 1 || courseID > 5)
                 printf("Invalid Course ID!\n");
-            } 
-            else if (reg[id - 1] == 0) {
-                printf("You are not registered for this course!\n");
-            } 
-            else {
-                reg[id - 1] = 0;          // Mark course as not registered
-                credits -= hrs[id - 1];    // Subtract credit hours
-                printf("Course dropped successfully!\n");
-            }
-        }
+            else if (registered[courseID - 1] == 0)
+                printf("You did not register this course!\n");
+            else
+            {
+                registered[courseID - 1] = 0;
 
-        // Show registered courses
-        else if (choice == 4) {
-            int none = 1;
-            printf("\nRegistered Courses:\n");
-            for (int i = 0; i < 5; i++) {
-                if (reg[i] == 1) {
-                    printf("%d. %s\n", i + 1, names[i]);
-                    none = 0;
+                if (courseID == 1 || courseID == 4 || courseID == 5)
+                    totalCredits -= 3;
+                else if (courseID == 2 || courseID == 3)
+                    totalCredits -= 2;
+
+                printf("Course Dropped Successfully!\n");
+            }
+            break;
+
+        case 4:
+            printf("\nYour Registered Courses:\n");
+            int found = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                if (registered[i] == 1)
+                {
+                    found = 1;
+                    if (i == 0)
+                        printf("1. Programming Fundamentals\n");
+                    else if (i == 1)
+                        printf("2. Islamiyat\n");
+                    else if (i == 2)
+                        printf("3. Maths\n");
+                    else if (i == 3)
+                        printf("4. English\n");
+                    else if (i == 4)
+                        printf("5. Applied Physics\n");
                 }
             }
-            if (none) {
+            if (!found)
                 printf("No courses registered yet.\n");
-            }
-        }
-
-        // Show total credits
-        else if (choice == 5) {
-            printf("Total Credit Hours: %d\n", credits);
-        }
-
-        // Exit program
-        else if (choice == 6) {
-            printf("Exiting program. Thank you!\n");
             break;
-        }
 
-        // Invalid choice
-        else {
-            printf("Invalid choice! Please try again.\n");
+        case 5:
+            printf("Total Credit Hours: %d\n", totalCredits);
+            break;
+
+        case 6:
+            printf("Thank you! Exiting...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice! Try again.\n");
         }
     }
-
-    return 0;
 }
