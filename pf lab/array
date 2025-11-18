@@ -1,0 +1,23 @@
+#include<stdio.h>
+int main(){
+int arr[5];
+int n=5;
+int key;
+int i;
+int found=0;
+printf ("Enter 5 number ");
+for (i=0;i<5;i++);
+scanf("%d",&arr[i]);
+printf ( "Enter number to search:");
+for(i=0;i<5;i++);
+if 
+(arr[i]==key){
+found=1;
+}
+
+if (found)
+printf("Number found at index\n");
+else
+printf("Number not found\n");
+return 0;
+}
