@@ -1,0 +1,9 @@
+
+  fruits = ["Apple", "Banana", "Mangoes", "Orange, "Grapes"]  
+  index = int(input("Enter an index (0-4): "))  
+    
+  if 0 <= index <= 4:  
+    print("Fruit at index", index, "is:", fruits[index])  
+  else:  
+    print("Invalid index!")  
+ 
