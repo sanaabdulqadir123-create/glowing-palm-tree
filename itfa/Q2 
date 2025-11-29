@@ -1,0 +1,4 @@
+
+  arr = [int(x) for x in input("Enter list elements separated by spaces: ").split()]  
+  print(len(arr))  
+ 
