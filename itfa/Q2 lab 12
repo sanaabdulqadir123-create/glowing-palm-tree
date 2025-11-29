@@ -1,0 +1,12 @@
+
+
+   def filter_numbers(nums):
+    for num in nums:
+        if num > 500:
+            break
+        if num > 150:
+            # skip numbers greater than 150 but not >500
+            continue
+        if num % 5 == 0:
+            print(num)
+
