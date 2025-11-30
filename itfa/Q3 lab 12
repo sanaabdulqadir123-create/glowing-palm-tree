@@ -1,0 +1,8 @@
+
+def print_reverse(lst):
+   for i in range(len(lst)-1, -1, -1):
+        print(lst[i])
+
+# example
+lst1 = [10, 20, 30, 40, 50]
+print_reverse(lst1)
