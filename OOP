@@ -1,1 +1,23 @@
-
+#include<iostream>
+using namespace std;
+int main (){
+    int rollnumber;
+    int marks [5];
+    int sum = 0;
+    float percentage;
+    
+    
+    cout<<" Enter roll number";
+    cin>> rollnumber;
+    for (int i= 0;i<5;i++){
+        cout<< "Enter marks obtained";
+        cin>> marks [i];
+        
+    sum = sum + marks[i];
+    }
+    percentage = (sum/500.00)*100;
+    cout<<"roll number:"<<rollnumber<<endl;
+    cout<<"obtained marks:"<<sum<<endl;
+cout<<"percentage:"<<percentage<<"%"<<endl;
+return 0;
+}
